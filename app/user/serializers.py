@@ -47,7 +47,9 @@ class AuthTokenSerializer(serializers.Serializer):
 
         if email and password:
             user = authenticate(
-                request=self.context.get("request"), email=email, password=password
+                request=self.context.get("request"),
+                email=email,
+                password=password
             )
 
             if not user:
@@ -60,7 +62,8 @@ class AuthTokenSerializer(serializers.Serializer):
                 )
         else:
             raise serializers.ValidationError(
-                _("Must include both 'email' and 'password'"), code="authorization"
+                _("Must include both 'email' and 'password'"),
+                code="authorization"
             )
 
         attrs["user"] = user
